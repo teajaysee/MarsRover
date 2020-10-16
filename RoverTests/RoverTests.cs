@@ -44,7 +44,6 @@ namespace RoverTests
             var plateau = new Plateau();
             plateau.SetGridSize(40, 30);
 
-            // this needed to handle multiple rovers
             var RoverController = new RoverController(plateau);
 
             var rover = new Rover(RoverController);
@@ -58,6 +57,23 @@ namespace RoverTests
 
 
             Assert.ThrowsException<Exception>(() => { rover2.Move("R1R3L2L3"); });
+
+        }
+
+
+        [TestMethod]
+        public void Try_Set_Position_Outside_Grid_Bounds ()
+        {
+            var plateau = new Plateau();
+            plateau.SetGridSize(40, 30);
+
+            var RoverController = new RoverController(plateau);
+
+            var rover = new Rover(RoverController);
+           
+            Assert.ThrowsException<ArgumentException>(() => {
+                rover.SetPosition(50, 50, "N");
+            });
 
         }
     }
